@@ -80,7 +80,7 @@ public class Bloque3 {
             System.out.println("Título: " + book.getTitle() + ", Precio: " + book.getPrice());
         }
     }
-//$. Mostrar Titulos y genero de los libros: 
+//4. Mostrar Titulos y genero de los libros: 
     private static void mostrarLibrosPorGenero(Document doc) {
         NodeList bookList = doc.getElementsByTagName("Book");
         for (int i = 0; i < bookList.getLength(); i++) {
