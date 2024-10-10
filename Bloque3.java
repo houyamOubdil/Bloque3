@@ -39,14 +39,11 @@ public class Bloque3 {
             // Mostrar libros por género
             mostrarLibrosPorGenero(doc);
 
-            // Traducir y guardar el XML
-            traducirYGuardarXML(doc);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+// 1. Mostrar los Ids de libros: 
     private static void mostrarIDs(Document doc) {
         NodeList bookList = doc.getElementsByTagName("Book");
         for (int i = 0; i < bookList.getLength(); i++) {
@@ -55,7 +52,7 @@ public class Bloque3 {
             System.out.println("ID del libro: " + id);
         }
     }
-
+//2. Mostrar los autores y titulos:
     private static void mostrarAutoresYTitulos(Document doc) {
         NodeList bookList = doc.getElementsByTagName("Book");
         for (int i = 0; i < bookList.getLength(); i++) {
@@ -65,7 +62,7 @@ public class Bloque3 {
             System.out.println("Autor: " + author + ", Título: " + title);
         }
     }
-
+//3. Mostrar los titulos y precios de barato a caro:
     private static void mostrarTitulosYPreciosOrdenados(Document doc) {
         NodeList bookList = doc.getElementsByTagName("Book");
         ArrayList<Book> books = new ArrayList<>();
@@ -83,7 +80,7 @@ public class Bloque3 {
             System.out.println("Título: " + book.getTitle() + ", Precio: " + book.getPrice());
         }
     }
-
+//$. Mostrar Titulos y genero de los libros: 
     private static void mostrarLibrosPorGenero(Document doc) {
         NodeList bookList = doc.getElementsByTagName("Book");
         for (int i = 0; i < bookList.getLength(); i++) {
@@ -93,36 +90,6 @@ public class Bloque3 {
             System.out.println("Género: " + genre + ", Título: " + title);
         }
     }
-
-    private static void traducirYGuardarXML(Document doc) {
-        translateTagName(doc, "Catalog", "Catalogo");
-        translateTagName(doc, "Book", "Libro");
-        translateTagName(doc, "Title", "Título");
-        translateTagName(doc, "Genre", "Genero");
-        translateTagName(doc, "Price", "Precio");
-        translateTagName(doc, "PublishDate", "Fecha de publicación");
-        translateTagName(doc, "Description", "Descripción");
-
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("libros.xml"));
-            transformer.transform(source, result);
-            System.out.println("Archivo XML traducido y guardado como libros.xml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void translateTagName(Document doc, String oldTagName, String newTagName) {
-        NodeList nodeList = doc.getElementsByTagName(oldTagName);
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Element element = (Element) nodeList.item(i);
-            doc.renameNode(element, element.getNamespaceURI(), newTagName);
-        }
-    }
-
     static class Book {
         private String title;
         private double price;
